@@ -1,0 +1,66 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="http://natas.labs.overthewire.org/css/level.css">
+<link rel="stylesheet" href="http://natas.labs.overthewire.org/css/jquery-ui.css" />
+<link rel="stylesheet" href="http://natas.labs.overthewire.org/css/wechall.css" />
+</head>
+<body>
+<h1>Argus CTF day</h1>
+<div id="content">
+
+<?
+
+$encodedSecret = "3d3d516343746d4d6d6c315669563362";
+
+function encodeSecret($secret) {
+    return bin2hex(strrev(base64_encode($secret)));
+}
+
+if(array_key_exists("submit", $_POST)) {
+    if(encodeSecret($_POST['secret']) == $encodedSecret) {
+    print "Access granted. The password for natas9 is <censored>";
+    } else {
+    print "Wrong secret";
+    }
+}
+?>
+
+<form method=post>
+Input secret: <input name=secret><br>
+<input type=submit name=submit>
+</form>
+
+<div id="viewsource">
+  <button onclick="downloadFile()">Download Source Code</button>
+</div>
+
+<script>
+  function downloadFile() {
+    // Create a dummy link
+    var link = document.createElement("a");
+
+    // Set the href attribute to the file you want to download
+    link.href = "source";
+
+    // Specify the download attribute along with the desired file name
+    link.download = "source";
+
+    // Append the link to the document
+    document.body.appendChild(link);
+
+    // Trigger a click on the link to start the download
+    link.click();
+
+    // Remove the link from the document
+    document.body.removeChild(link);
+  }
+
+</script>
+
+
+
+
+
+</div>
+</body>
+</html>
